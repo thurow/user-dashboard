@@ -2,8 +2,9 @@ import { ChangeEvent, useCallback, useMemo, useState } from "react"
 import useSWR from "swr"
 import { ListHeader } from "./ListHeader"
 import { User } from "../../types"
-import { UserInList, UserDetailsContainer, NamesContainer, MainContainer, ListSection } from "./styles"
-import { AvatarPlaceholder, NormalLink, Typography } from "../../components"
+import { UserInList, UserDetailsContainer, NamesContainer, ListSection } from "./styles"
+import { AvatarPlaceholder, NormalLink, Typography, MainContainer } from "../../components"
+import { useHistory } from "react-router-dom"
 
 export enum SORT_BY {
   NAME = 'name',
@@ -15,6 +16,7 @@ export function UserList(): JSX.Element {
   const [search, setSearch] = useState('')
   const [sortBy, setSortBy] = useState<SORT_BY>(SORT_BY.NAME)
   const { data, error } = useSWR<User[]>('users')
+  const history = useHistory()
 
   const handleSearch = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -58,7 +60,7 @@ export function UserList(): JSX.Element {
       />
       <ListSection>
         {usersList.map(u => (
-          <UserInList key={u.id}>
+          <UserInList key={u.id} onClick={() => history.push(`/users/${u.id}`)}>
             <AvatarPlaceholder />
             <UserDetailsContainer>
               <NamesContainer>

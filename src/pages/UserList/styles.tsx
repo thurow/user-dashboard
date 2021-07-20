@@ -1,10 +1,5 @@
 import styled from "styled-components";
 
-export const MainContainer = styled.main`
-  max-width: 102.4rem;
-  margin: 0 auto;
-`
-
 export const ListSection = styled.section`
   border-top: 1px solid darkgray;
 
@@ -20,6 +15,7 @@ export const UserInList = styled.article`
   flex-direction: row;
   padding: 1.5rem;
   width: 100%;
+  cursor: pointer;
 
   &:nth-child(even) {
     background-color: #f7f6f6;

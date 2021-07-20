@@ -31,8 +31,9 @@ module.exports = {
   },
   target: 'web',
   output: {
-    path: path.resolve(__dirname, "public"),
-    filename: "bundle.js",
+    path: path.resolve(__dirname, 'public'),
+    filename: '[name].[contenthash].js',
+    publicPath: '/',
   },
   devServer: {
     contentBase: path.join(__dirname, 'public'),
