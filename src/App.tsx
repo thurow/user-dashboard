@@ -15,7 +15,7 @@ export function App(): JSX.Element {
         revalidateOnFocus: true
       }}
     >
-      <ErrorBoundary>
+      <ErrorBoundary fallback={<h1>Sorry.. there was an error</h1>}>
         <Suspense fallback={<>Loading...</>}>
           <BrowserRouter>
             <GlobalStyle />

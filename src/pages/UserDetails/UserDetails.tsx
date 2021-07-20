@@ -1,9 +1,12 @@
+import { Suspense } from "react"
 import { Redirect, useParams } from "react-router-dom"
 import useSWR from "swr"
 import { MainContainer, NormalLink, Typography } from "../../components"
+import ErrorBoundary from "../../ErrorBoundary"
 import { User } from "../../types"
 import { DetailsHeader } from "./DetailsHeader"
 import { DetailsSection, DetailsWrapper } from "./styles"
+import { UserPosts } from "./UserPosts"
 
 export function UserDetails (): JSX.Element {
   const { id } = useParams<{ id?: string }>()
@@ -34,6 +37,12 @@ export function UserDetails (): JSX.Element {
           <Typography><em>&quot;{data?.company.catchPhrase}&quot;</em></Typography>
         </DetailsSection>
       </DetailsWrapper>
+      <h2>Posts by {data?.name}</h2>
+      <ErrorBoundary fallback={<h3>Sorry, we won&apos;t be able to get user&apos;s posts</h3>}>
+        <Suspense fallback={<p>Loading posts...</p>}>
+          <UserPosts userId={id} />
+        </Suspense>
+      </ErrorBoundary>
     </MainContainer>
   )
 }
