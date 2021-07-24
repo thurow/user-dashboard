@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 import { fetcher } from '@/services';
 import ErrorBoundary from './ErrorBoundary';
-import { Loading} from '@/components';
+import { Loading, Alert } from '@/components';
 
 const UserDetails = lazy(() =>
   import('@/pages/UserDetails/UserDetails').then(module => ({
@@ -27,7 +27,7 @@ export function App(): JSX.Element {
         revalidateOnFocus: true
       }}
     >
-      <ErrorBoundary fallback={<h1>Sorry.. there was an error</h1>}>
+      <ErrorBoundary fallback={<Alert type="error" component="h1">Sorry, there was an error. Try refreshing the page again.</Alert>}>
         <Suspense fallback={<Loading />}>
           <BrowserRouter>
             <GlobalStyle />

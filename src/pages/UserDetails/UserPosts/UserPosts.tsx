@@ -1,5 +1,5 @@
 import useSWR from "swr"
-import { H3Typography, Typography } from "@/components"
+import { H3Typography, Typography, Alert } from "@/components"
 import { Post } from "@/types"
 import { PostArticle, PostsWrapper } from "./styles"
 
@@ -12,6 +12,7 @@ export function UserPosts({ userId }: UserPostsProps): JSX.Element {
 
   return (
     <PostsWrapper>
+      {data?.length === 0 && <Alert type="info">No posts found from this user.</Alert>}
       {data?.map(post => (
         <PostArticle key={post.id}>
           <H3Typography>{post.title}</H3Typography>

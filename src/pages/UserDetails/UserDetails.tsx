@@ -1,7 +1,13 @@
 import { Suspense } from "react"
 import { Redirect, useParams } from "react-router-dom"
 import useSWR from "swr"
-import { H3Typography, MainContainer, NormalLink, Typography } from "@/components"
+import {
+  H3Typography,
+  MainContainer,
+  NormalLink,
+  Typography,
+  Alert
+} from "@/components"
 import ErrorBoundary from "@/ErrorBoundary"
 import { User } from "@/types"
 import { DetailsHeader } from "./DetailsHeader"
@@ -22,7 +28,7 @@ export function UserDetails (): JSX.Element {
         <DetailsSection>
           <H3Typography>Contact Info</H3Typography>
           <Typography>Username: {data?.username}</Typography>
-          <Typography>Email: <NormalLink href={`mailto:${data?.email}`}>{data?.email}</NormalLink></Typography>
+          <Typography>Email: <NormalLink target="_blank" href={`mailto:${data?.email}`}>{data?.email}</NormalLink></Typography>
           <Typography>Phone: <NormalLink href={`tel:${data?.phone}`}>{data?.phone}</NormalLink></Typography>
           <Typography>Website: <NormalLink target="_blank" rel="noreferrer noopener" href={`http://${data?.website}`}>{data?.website}</NormalLink></Typography>
         </DetailsSection>
@@ -39,7 +45,7 @@ export function UserDetails (): JSX.Element {
       </DetailsWrapper>
       <DetailsWrapper $isPostsWrapper>
         <DetailsPostSectionTitle>Posts by {data?.name}</DetailsPostSectionTitle>
-        <ErrorBoundary fallback={<h3>Sorry, we won&apos;t be able to get user&apos;s posts</h3>}>
+        <ErrorBoundary fallback={<Alert type="error">Sorry, we won&apos;t be able to get user&apos;s posts</Alert>}>
           <Suspense fallback={<p>Loading posts...</p>}>
             <UserPosts userId={id} />
           </Suspense>

@@ -3,7 +3,13 @@ import useSWR from "swr"
 import { ListHeader } from "./ListHeader"
 import { User } from "@/types"
 import { UserInList, UserDetailsContainer, NamesContainer, ListSection } from "./styles"
-import { AvatarPlaceholder, NormalLink, Typography, MainContainer } from "@/components"
+import {
+  AvatarPlaceholder,
+  NormalLink,
+  Typography,
+  MainContainer,
+  Alert
+} from "@/components"
 import { useHistory } from "react-router-dom"
 import { useDebounce } from "@/hooks"
 
@@ -61,6 +67,11 @@ export function UserList(): JSX.Element {
         handleSortBy={handleSortBy}
       />
       <ListSection>
+        {usersList.length === 0 && (
+          <Alert type="info">
+            {debouncedSearch.length ? 'No users found with this filter.' : 'No users found'}
+          </Alert>
+        )}
         {usersList.map(u => (
           <UserInList key={u.id} onClick={() => history.push(`/users/${u.id}`)}>
             <AvatarPlaceholder />
@@ -70,7 +81,7 @@ export function UserList(): JSX.Element {
                 <Typography>{u.username}</Typography>
               </NamesContainer>
               <div>
-                <NormalLink href={`mailto:${u.email.toLocaleLowerCase()}`}>{u.email.toLocaleLowerCase()}</NormalLink>
+                <NormalLink onClick={(e) => e.stopPropagation()} target="_blank" href={`mailto:${u.email.toLocaleLowerCase()}`}>{u.email.toLocaleLowerCase()}</NormalLink>
               </div>
             </UserDetailsContainer>
           </UserInList>
