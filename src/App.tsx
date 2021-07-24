@@ -1,11 +1,22 @@
+import { lazy, Suspense } from 'react';
 import { GlobalStyle } from './styles'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { UserDetails, UserList } from '@/pages';
 import { SWRConfig } from 'swr';
 import { fetcher } from '@/services';
-import { Suspense } from 'react';
 import ErrorBoundary from './ErrorBoundary';
 import { Loading} from '@/components';
+
+const UserDetails = lazy(() =>
+  import('@/pages/UserDetails/UserDetails').then(module => ({
+    default: module.UserDetails,
+  }))
+);
+
+const UserList = lazy(() =>
+  import('@/pages/UserList/UserList').then(module => ({
+    default: module.UserList,
+  }))
+);
 
 export function App(): JSX.Element {
   return (
