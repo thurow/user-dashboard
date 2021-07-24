@@ -15,10 +15,17 @@ export const UserInList = styled.article`
   flex-direction: row;
   padding: 1.5rem;
   width: 100%;
+  background-color: #FFF;
+  transition: all 300ms ease-in-out;
   cursor: pointer;
 
   &:nth-child(even) {
     background-color: #f7f6f6;
+  }
+
+  &:hover {
+    border: 1px solid darkgray;
+    transform: scale(1.03)
   }
 
   &:not(:last-of-type) {

@@ -9,3 +9,15 @@ export const Typography = styled.p`
     font-size: 1.4rem;
   }
 `
+
+export const H3Typography = styled.h3`
+  color: #6e6e6e;
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  text-transform: capitalize;
+
+  @media(min-width: 23rem) {
+    font-size: 1.6rem;
+  }
+`

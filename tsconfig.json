@@ -8,6 +8,7 @@
     "module": "ESNext",
     "target": "es2015",
     "jsx": "react-jsx",
+    "baseUrl": "src",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
@@ -18,8 +19,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+    "paths": {
+      "@/*": [
+        "*"
+      ]
+    }
   },
   "include": [
-    "src"
+    "src",
+    "index.tsx"
   ]
 }

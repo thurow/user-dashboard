@@ -21,6 +21,10 @@ export const ListTitle = styled.h1`
   font-size: 3rem;
   color: #858585;
   flex: 1;
+
+  @media(min-width: 30rem) {
+    font-size: 4rem;
+  }
 `
 
 export const ListOptionsContainer = styled.div`

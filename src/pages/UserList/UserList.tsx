@@ -1,10 +1,11 @@
 import { ChangeEvent, useCallback, useMemo, useState } from "react"
 import useSWR from "swr"
 import { ListHeader } from "./ListHeader"
-import { User } from "../../types"
+import { User } from "@/types"
 import { UserInList, UserDetailsContainer, NamesContainer, ListSection } from "./styles"
-import { AvatarPlaceholder, NormalLink, Typography, MainContainer } from "../../components"
+import { AvatarPlaceholder, NormalLink, Typography, MainContainer } from "@/components"
 import { useHistory } from "react-router-dom"
+import { useDebounce } from "@/hooks"
 
 export enum SORT_BY {
   NAME = 'name',
@@ -14,6 +15,7 @@ export enum SORT_BY {
 
 export function UserList(): JSX.Element {
   const [search, setSearch] = useState('')
+  const debouncedSearch = useDebounce(search, 300)
   const [sortBy, setSortBy] = useState<SORT_BY>(SORT_BY.NAME)
   const { data, error } = useSWR<User[]>('users')
   const history = useHistory()
@@ -34,9 +36,9 @@ export function UserList(): JSX.Element {
 
   const usersList = useMemo(() => {
     const filteredUsers = data?.filter(u =>
-      u.name.toLocaleLowerCase().includes(search) ||
-      u.username.toLocaleLowerCase().includes(search) ||
-      u.email.toLocaleLowerCase().includes(search)
+      u.name.toLocaleLowerCase().includes(debouncedSearch) ||
+      u.username.toLocaleLowerCase().includes(debouncedSearch) ||
+      u.email.toLocaleLowerCase().includes(debouncedSearch)
     ) ?? []
 
     return filteredUsers.sort((a, b) => {
@@ -46,7 +48,7 @@ export function UserList(): JSX.Element {
         return 1;
       return 0;
     })
-  }, [data, search, sortBy])
+  }, [data, debouncedSearch, sortBy])
 
   if (error) return <>Error component</>
 

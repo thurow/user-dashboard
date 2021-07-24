@@ -17,6 +17,10 @@ const details_css = css`
   @media(min-width: 30rem) {
     font-size: 3rem;
   }
+
+  @media(min-width: 50rem) {
+    font-size: 4rem;
+  }
 `
 
 export const NavIcon = styled.span`
