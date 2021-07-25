@@ -1,4 +1,7 @@
 # User Dashboard
+
+[![CI checks](https://github.com/thurow/user-dashboard/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/thurow/user-dashboard/actions/workflows/CI.yml)
+
 React project example for HTML, CSS, Javascript, SPA and API integration.
 
 ## Commands
