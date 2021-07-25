@@ -27,6 +27,15 @@ export default {
   // The directory where Jest should output its coverage files
   coverageDirectory: "coverage",
 
+  coverageThreshold: {
+    global: {
+      "branches": 100,
+      "functions": 100,
+      "lines": 100,
+      "statements": 100
+    }
+  },
+
   testMatch: ['<rootDir>/src/**/?(*.)test.{ts,tsx}'],
 
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
