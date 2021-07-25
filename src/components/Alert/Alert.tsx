@@ -15,6 +15,6 @@ export const Alert = memo(({ type, component = 'h3', children }: AlertProps) => 
       <Tag>{children}</Tag>
     </AlertContainer>
   )
-}, (prev, next) => prev.children === next.children)
+})
 
 Alert.displayName = 'Alert'

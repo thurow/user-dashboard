@@ -1,0 +1,54 @@
+name: CI checks
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set Environment Name
+        id: vars
+        run: echo ::set-output name=branch_name::${GITHUB_REF#refs/*/}
+
+      # Checkout needs the full checkout
+      - name: Checkout Source Code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      # Add node
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      # Yarn Caching setup
+      - name: Get Yarn cache Path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Restore Cache
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: |
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install Node Dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Linter check
+        run: yarn lint
+
+      - name: Test check
+        run: yarn test

@@ -6,11 +6,23 @@
   },
   "plugins": [
     "@typescript-eslint",
-    "react-hooks"
+    "react-hooks",
+    "jest-dom"
   ],
   "extends": [
     "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jest-dom/recommended"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "**/*.test.js"
+      ],
+      "env": {
+        "jest": true
+      }
+    }
   ],
   "rules": {
     "react-hooks/rules-of-hooks": "error",

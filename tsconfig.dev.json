@@ -2,5 +2,9 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "jsx": "react-jsxdev"
-  }
+  },
+  "include": [
+    "src",
+    "./jest-setup.ts"
+  ]
 }
