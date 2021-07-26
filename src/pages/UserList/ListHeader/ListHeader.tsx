@@ -1,6 +1,6 @@
 import { ChangeEventHandler, memo } from "react"
 import { InputField, Label, SelectField } from "@/components"
-import { SORT_BY } from "@/pages"
+import { SORT_BY } from "@/types"
 import { ListHeaderContainer, ListOptionsContainer, ListTitle } from "./styles"
 
 type ListHeaderProps = {

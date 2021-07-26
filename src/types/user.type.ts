@@ -27,3 +27,9 @@ export type User = {
   website: string
   company: UserCompany
 }
+
+export enum SORT_BY {
+  NAME = 'name',
+  USERNAME = 'username',
+  EMAIL = 'email'
+}
