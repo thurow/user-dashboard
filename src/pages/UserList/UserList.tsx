@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEvent, MouseEventHandler, useCallback, useMemo, useState } from "react"
+import { ChangeEvent, MouseEventHandler, useCallback, useMemo, useState } from "react"
 import { ListHeader } from "./ListHeader"
 import { UserInList, UserDetailsContainer, NamesContainer, ListSection } from "./styles"
 import {
