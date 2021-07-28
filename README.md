@@ -4,6 +4,10 @@
 
 React project example for HTML, CSS, Javascript, SPA and API integration.
 
+## Instalation
+
+Before running the app, you need to install the dependencies by running `yarn` at your terminal or shell.
+
 ## Commands
 
 - `yarn start` to start the application at the port 3005;

@@ -18,11 +18,12 @@ export function UserDetails (): JSX.Element {
 
   const user = useGetUser(id)
 
+  /* istanbul ignore next */
   if (!id) return <Redirect to="" />
 
   return (
     <MainContainer>
-      <DetailsHeader name={user?.name ?? ''} />
+      <DetailsHeader name={user?.name} />
       <DetailsWrapper>
         <DetailsSection>
           <H3Typography>Contact Info</H3Typography>

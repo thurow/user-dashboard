@@ -1,7 +1,7 @@
 import { DetailsHeaderContainer, DetailsTitle, NavIcon, UsersLink } from "./styles"
 
 type DetailsHeaderProps = {
-  name: string
+  name?: string
 }
 
 export function DetailsHeader ({ name }: DetailsHeaderProps): JSX.Element {

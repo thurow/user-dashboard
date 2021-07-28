@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useMemo, useState } from "react"
+import { ChangeEvent, MouseEvent, MouseEventHandler, useCallback, useMemo, useState } from "react"
 import { ListHeader } from "./ListHeader"
 import { UserInList, UserDetailsContainer, NamesContainer, ListSection } from "./styles"
 import {
@@ -33,17 +33,26 @@ export function UserList(): JSX.Element {
     []
   )
 
+  /* istanbul ignore next */
+  const handleCancelNavigation: MouseEventHandler<HTMLAnchorElement> = useCallback(
+    (e) => {
+      e.stopPropagation()
+    },
+    []
+  )
+
   const usersList = useMemo(() => {
     const filter = debouncedSearch.toLocaleLowerCase()
     const filteredUsers = users.filter(u =>
       u.name.toLocaleLowerCase().includes(filter) ||
       u.username.toLocaleLowerCase().includes(filter) ||
       u.email.toLocaleLowerCase().includes(filter)
-    ) ?? []
+    )
 
     return filteredUsers.sort((a, b) => {
       if (a[sortBy] < b[sortBy])
         return -1;
+      /* istanbul ignore next */
       if (a[sortBy] > b[sortBy])
         return 1;
       /* istanbul ignore next */
@@ -75,8 +84,7 @@ export function UserList(): JSX.Element {
               </NamesContainer>
               <div>
                 <NormalLink
-                  // istanbul ignore next
-                  onClick={(e) => e.stopPropagation()}
+                  onClick={handleCancelNavigation}
                   target="_blank"
                   href={`mailto:${u.email.toLocaleLowerCase()}`}
                 >
